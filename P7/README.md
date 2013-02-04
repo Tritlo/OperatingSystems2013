@@ -1,7 +1,9 @@
 Project 7
 ====================
 ConnectionLessConsumer and ConnectionLessProducer pair.
-    Comments are missing, and should be added.
+
+To do:
+[ ] Add comments
 
 N.B.:
 Start ConnectionLessConsumer before ConnectionLessProducer is started.
