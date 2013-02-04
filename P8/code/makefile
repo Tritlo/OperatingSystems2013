@@ -22,7 +22,7 @@ testclient:
 	java ConnectionOrientedClient Test6 localhost&
 	java ConnectionOrientedClient Test7 localhost&
 	java ConnectionOrientedClient Test8 localhost&
-	java ConnectionOrientedClient Test9 localhost
+	java ConnectionOrientedClient Test9 localhost&
 
 clean:
 	rm *.class
