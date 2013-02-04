@@ -22,12 +22,11 @@ public class ConnectionLessProducer
          byte[] message = stringMsg.getBytes();
 	     DatagramPacket request = new DatagramPacket(message, message.length,
 		      aHost, serverPort);
-         System.out.printf("Sending: %s\n", stringMsg);
+         System.out.printf("Producer: Sending: %s\n", stringMsg);
 	     aSocket.send(request);
 	     byte[] buffer = new byte[1000];
 	     DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 	     aSocket.receive(reply);
-	     System.out.println("Reply: " + new String(reply.getData()));
          try
          {
             Thread.sleep(2000);
