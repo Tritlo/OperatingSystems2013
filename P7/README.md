@@ -3,7 +3,8 @@ Project 7
 ConnectionLessConsumer and ConnectionLessProducer pair.
 
 To do:
-[ ] Add comments
+
+-[ ] Add comments
 
 N.B.:
 Start ConnectionLessConsumer before ConnectionLessProducer is started.
