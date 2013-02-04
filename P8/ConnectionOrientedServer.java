@@ -9,7 +9,13 @@ public class ConnectionOrientedServer {
       ServerSocket listenSocket = new ServerSocket(serverPort);
       while (true) {
         Socket clientSocket = listenSocket.accept();
-        Connection c = new Connection(clientSocket); // Handle request
+        Thread handler = new requestHandlerThread(clientSocket);
+        handler.start();
+        try{
+        Thread.sleep(2000);
+        }catch(InterruptedException e)
+        {
+        }
       }
     } catch (IOException e) {
       System.out.println("Listen socket:" + e.getMessage());
