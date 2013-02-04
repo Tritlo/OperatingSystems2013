@@ -1,4 +1,3 @@
-package ch3Processes.connectionLessSocket;
 import java.io.*;
 import java.net.*;
 
@@ -15,9 +14,10 @@ public class ConnectionLessConsumer
       {
         DatagramPacket request = new DatagramPacket(buffer, buffer.length);
         aSocket.receive(request);
-	System.out.println("Recieved:" + request.getData());
+        String replyString = new String(request.getData());
+        System.out.printf("Recieved: %s\n", replyString) ;
         DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(),
-		       	request.getAddress(), request.getPort());
+                request.getAddress(), request.getPort());
         aSocket.send(reply);
       }
     } catch (SocketException e)

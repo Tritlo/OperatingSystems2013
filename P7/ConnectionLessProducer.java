@@ -1,9 +1,10 @@
-package ch3Processes.connectionLessSocket;
 import java.io.*;
 import java.net.*;
 
 public class ConnectionLessProducer
 {
+  
+
   public static void main(String args[])
   { // args[0]: message contents,
     // args[1]: destination hostname
@@ -18,14 +19,22 @@ public class ConnectionLessProducer
       while(true)
       {
 	     stringMsg = "" + (Integer.parseInt(stringMsg)+1);
-             byte[] message = stringMsg.getBytes();
+         byte[] message = stringMsg.getBytes();
 	     DatagramPacket request = new DatagramPacket(message, message.length,
 		      aHost, serverPort);
+         System.out.printf("Sending: %s\n", stringMsg);
 	     aSocket.send(request);
 	     byte[] buffer = new byte[1000];
 	     DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 	     aSocket.receive(reply);
 	     System.out.println("Reply: " + new String(reply.getData()));
+         try
+         {
+            Thread.sleep(2000);
+         }
+         catch(InterruptedException e)
+         {
+         }
       }
     } catch (SocketException e)
     {
