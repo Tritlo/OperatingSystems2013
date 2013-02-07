@@ -9,10 +9,10 @@ public class ConnectionOrientedServer {
       ServerSocket listenSocket = new ServerSocket(serverPort);
       while (true) {
         Socket clientSocket = listenSocket.accept();
-        Thread handler = new requestHandlerThread(clientSocket);
+        Thread handler = new requestHandlerThread(clientSocket); //creates a new thread for the new client
         handler.start();
         try{
-        Thread.sleep(2000);
+        Thread.sleep(2000); //wait for a bit (replaces the suggested calculation of Fibonacci numbers)
         }catch(InterruptedException e)
         {
         }

@@ -4,7 +4,7 @@ ConnectionLessConsumer and ConnectionLessProducer pair.
 
 To do:
 
-- [ ] Add comments
+- [x] Add comments
 
 N.B.:
 Start ConnectionLessConsumer before ConnectionLessProducer is started.
