@@ -1,0 +1,19 @@
+Solution
+
+Project 7:
+Producer \to item \to Consumer
+Consumer \to "go on" \to Producer
+Producer \to item \to Consumer
+
+Way 1: Producer waits for ready before sending
+Client \to item \to Server
+Server \to "go on" \to Client
+
+
+Way 2: Producer sends, no matter what
+Server \to item \to Client
+Client \to "go on" \to Server
+
+Producer:
+
+
