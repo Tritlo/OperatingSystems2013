@@ -3,18 +3,15 @@ import java.net.*;
 
 public class ConnectionLessProducer
 {
-  
-
   public static void main(String args[])
-  { // args[0]: message contents,
-    // args[1]: destination hostname
+  { 
     DatagramSocket aSocket = null;
     try 
     {
       aSocket = new DatagramSocket();
       String stringMsg = "0";
       String prevReply = "0";
-      InetAddress aHost = InetAddress.getByName("localhost");
+      InetAddress aHost = InetAddress.getByName("localhost"); //recieve a message from the same computer
       int serverPort = 6789; // agreed port
       while(true)
       {
@@ -23,13 +20,13 @@ public class ConnectionLessProducer
 	     DatagramPacket request = new DatagramPacket(message, message.length,
 		      aHost, serverPort);
          System.out.printf("Producer: Sending: %s\n", stringMsg);
-	     aSocket.send(request);
+	     aSocket.send(request); //send a message
 	     byte[] buffer = new byte[1000];
 	     DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-	     aSocket.receive(reply);
+	     aSocket.receive(reply); //wait for a reply
          try
          {
-            Thread.sleep(2000);
+            Thread.sleep(2000); //have a small waiting period
          }
          catch(InterruptedException e)
          {
