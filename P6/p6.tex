@@ -1,0 +1,97 @@
+\documentclass[a4]{article}
+
+\input{/home/tritlo/Dropbox/Latex/header.tex}
+
+
+\nonums{}
+
+\title{
+    Operating Systems\\
+    Project 6
+}
+\author{
+    Haukur Óskar Þorgeirsson\\
+    hth152@hi.is\\
+    Matthías Páll Gissurarson\\
+    mpg3@hi.is
+}
+
+\begin{document}
+\maketitle
+
+\section{Creating and terminating processes in Windows}
+
+\subsection*{CreateProcess()}
+
+CreateProcess is the Windows system call for creating a process (\emph{surprisingly}). It has the following parameters:
+
+\subsubsection*{bInheritHandles}
+
+A boolean value. Determines whether the new process inherits the calling process' inheritable handles.
+
+\subsubsection*{dwCreationFlags}
+
+The flags that control the proirity class and the creation of the process.
+
+\subsubsection*{lpStartupInfo}
+
+A pointer to a STARTUPINFO structure.
+
+\subsubsection*{lpProcessInformation}
+
+A pointer to which indetification information about the new pointer will be sent.\\\\
+
+\textbf{The following parameters are optional}
+
+\subsubsection*{lpApplicationName}
+
+The name of the module to be executed. E.g. the location of the .exe file to be executed.
+
+\subsubsection*{lpCommandLine}
+
+The command line to be executed.
+
+\subsubsection*{lpProcessAttributes}
+
+Determines whether the returned handle to the new process object can be inherited by child processes.
+
+\subsubsection*{lpThreadAttributes}
+
+Same as above. But for threads.
+
+\subsubsection*{lpEnvironment}
+
+A pointer to the environment block for the new process.
+
+\subsubsection*{lpCurrentDirectory}
+
+The path to the current directory for the process.
+
+\subsection*{TerminateProcess}
+
+The Windows system call for terminating the specified process as well as all of it's threads. It has two parameters:
+
+\subsubsection*{hProcess}
+
+A handle to the process to be terminated.
+
+\subsubsection*{uExitCode}
+
+The exit code to be used by the process terminated and it's threads.
+
+\section{Creating a process in Windows vs. POSIX}
+
+In Windows you create a completely new process each time you call \texttt{CreateProcess}. In POSIX, this can not be done. Sort of. It is possible (and often done) to first use \texttt{fork()} to create a new, duplicate process and then use \texttt{exec()} to replace the current process image of the duplicate process with a new process.
+
+\section*{Sources}
+
+\begin{verbatim}
+
+http://msdn.microsoft.com/en-us/library/windows/desktop/ms682425(v=vs.85).aspx
+http://msdn.microsoft.com/en-us/library/windows/desktop/ms686714(v=vs.85).aspx
+http://pubs.opengroup.org/onlinepubs/009604499/functions/exec.html
+http://pubs.opengroup.org/onlinepubs/9699919799/functions/fork.html
+
+\end{verbatim}
+
+\end{document}
