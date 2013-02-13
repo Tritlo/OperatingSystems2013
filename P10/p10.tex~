@@ -1,0 +1,18 @@
+\documentclass[a4]{article}
+
+\input{/home/tritlo/Dropbox/Latex/header.tex}
+
+
+\title{Operating Systems\\
+Project 9}
+\author{
+    Haukur Óskar Þorgeirsson\\
+    hth152@hi.is \and
+    Matthías Páll Gissurarson\\
+    mpg3@hi.is
+}
+\begin{document}
+\maketitle
+
+
+\end{document}
