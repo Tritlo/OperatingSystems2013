@@ -1,0 +1,44 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{a4,graphics,amsmath,amsfonts,amsbsy,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{comment}
+
+\setlength{\parskip}{8pt plus 1pt minus 1pt}
+%Verdur ad vera her, sumir pakkar dependa a thetta.
+\usepackage[icelandic]{babel}
+
+%viljum ekki númeraða kafla á dæmum
+
+\setcounter{secnumdepth}{-1}
+
+%flýtiskipanir
+\newcommand{\e}{\emph}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\f}{\frac}
+\newcommand{\Lra}{\Leftrightarrow}
+
+\title{Operating Systems\\
+Project 1}
+\author{Matthías Páll Gissurarson \\mpg3@hi.is\\
+Haukur Óskar Þorgeirsson\\hth152@hi.is}
+
+\begin{document}
+\maketitle
+\section{Project 1}
+Not all systems need to have an operating system. F.ex. we can look at devices that are inherently embedded systems. They often have little processing power and very little memory, and filling these with an operating system would be useless, as the system often only has to serve a single purpose.
+Consider for example a simple calculator that preforms elementary operations.
+The logic of this calculator would be implemented with simple logic circuits, and there is no CPU or a running process, the logic gates simply respond to the press of the buttons. Having an operating system in place would only make it needlessly complicated, and not make our lives any easier
+
+However, it is often reasonable to have an operating system in many cases, especially when we are dealing with application program systems. Then the programs and programmers do not need to know the details of how the hardware does things, and can work on many platforms with relative ease, while the operating system serves as a middle man that accepts commands from the applications and executes the specific actions on the hardware, and then returns the result to the program. It also eliminates the need for each program having to manage it's own memory etc., and gets it by requesting it from the operating system. Thus having an OS greatly simplifies programming, leading to better programs (with well implemented operating systems).
+
+\end{document}

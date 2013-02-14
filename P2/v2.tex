@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{a4,graphics,amsmath,amsfonts,amsbsy,amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{comment}
+
+\setlength{\parskip}{8pt plus 1pt minus 1pt}
+%Verdur ad vera her, sumir pakkar dependa a thetta.
+\usepackage[icelandic]{babel}
+
+%viljum ekki númeraða kafla á dæmum
+
+\setcounter{secnumdepth}{-1}
+
+%flýtiskipanir
+\newcommand{\e}{\emph}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\f}{\frac}
+\newcommand{\Lra}{\Leftrightarrow}
+
+\title{Operating Systems\\
+Project 2}
+\author{Matthías Páll Gissurarson \\mpg3@hi.is\\
+Haukur Óskar Þorgeirsson\\hth152@hi.is}
+
+\begin{document}
+\maketitle
+
+\section{Project 2}
+IEEE and The Open group standardized POSIX, the number of this standard is 1-2008
+
+\begin{enumerate}
+\item{Base Definitions defines terms, concepts and interfaces for all the volumes in the standard, including utility conventions and C-language header definitions.}
+\item{System interfaces volume describes the interfaces offered to application programs by POSIX compliant systems, i.e. list of functions that application programs can call, i.e. what it can tell the OS to do, and also language-specific system services for the C programming languages. }
+\item{Shell \& Utilities includes definitions for commands to shells, and common utility programs, such as rm, mkdir, ls, etc.}
+\end{enumerate}
+
+
+Fully POSIX-compliant include LynxOs, OS X, Solaris, QNX, an others.
+
+\section{Sources}
+\begin{enumerate}
+\item{http://pubs.opengroup.org/onlinepubs/9699919799/}
+\item{http://en.wikipedia.org/wiki/POSIX}
+\end{enumerate}
+
+\end{document}
