@@ -1,0 +1,39 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc} 
+\usepackage[icelandic]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin=3cm]{geometry}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+\newcommand{\Nz}{\mathbb{N}_0}
+\newcommand{\ilc}{\lstinline}
+
+\begin{document}
+
+\title{Stýrikerfi\\Project 4}
+\author{Matthías Páll Gissurarson\\mpg3@hi.is\\Haukur Óskar Þorgeirsson\\hth152@hi.is}
+\maketitle
+
+We will be describing linux boot with SysV style init because that's what Wikipedia talks about.
+
+When the kernel has been loaded, it runs the swapper (also known as process 0) which configures memory management and detects what sort of CPU the computer has as well as it's functionaly, such as floating-point capabilities.
+
+Then, it makes a call to \lstinline{start_kernel()} which sets up interrupt handling, further configures the memory, runs \lstinline{init} (literally the mother of all user-mode processes), then runs \lstinline{idle} (the system idle process, unsurprisingly). It also mounts \lstinline{initrd}, or Initial Root Directory, a bare-bones "root directory"\ loaded straight into memory without the use of other devices (e.g. a hard drive) and is used to load various drivers (including a SATA driver to be able to access the hard drive).
+
+Next, \lstinline{pivot_root()} is called, which switches the \lstinline{initrd} for the actual root directory. At this point \ilc{init} takes control and mounts the filesystem, launches necessary services and finally loads the user-space, in most cases, some sort of login screen.
+
+
+\section*{Source}
+\begin{verbatim}
+http://en.wikipedia.org/wiki/Linux_startup_process#Kernel_startup_stage
+\end{verbatim}
+
+
+
+\end{document}

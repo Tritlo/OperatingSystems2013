@@ -1,0 +1,32 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc} 
+\usepackage[icelandic]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin=3cm]{geometry}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+
+\newcommand{\Nz}{\mathbb{N}_0}
+
+\begin{document}
+
+\title{Stýrikerfi\\Project 3}
+\author{Matthías Páll Gissurarson\\mpg3@hi.is\\Haukur Óskar Þorgeirsson\\hth152@hi.is}
+\maketitle
+
+\section{}
+
+The first question we would raise here is wether or not this could indeed happen, as we would think the CPU timer of OS$_2$ would stop while OS$_1$ is running. The fact that it does not raises concerns because when the timer runs out OS$_2$ think it has given it's process enough time, but that proves to be wrong if the timer keeps running while OS$_1$ is running.
+
+One idea would be to have the VM tell OS$_2$ to give said process more time, if this is possible. Otherwise, the VM could store whatever message the timer gives until OS$_1$'s time is up. Another possibility is to give control back to OS$_2$ and then giving OS$_1$ more time the next time it gets a time slice. this, however could lead to one OS hogging the CPU, say OS$_2$'s CPU timer goes off every 5 ms. Then OS$_1$ would always get far smaller timeslices.
+
+\section{}
+
+One possibility is to have two small "transfer disks", buffers which have about as much space as one of the VMs can write in one timeslice, in reality files in the host. Both OSs can read both transfer disks (TDs), but only one OS can write in each TD. Then the hypervisor could act as a middle man in such a way that it would emulate some sort of bus (for example a LAN cable) "connected" to the VMs, or anonymous pipelines. Say OS$_1$ has a timeslice it uses to send data to OS$_2$. Then in reality the hypervisor writes the data OS$_1$ is trying to relay to TD$_1$, and when OS$_1$'s time slice ends OS$_2$ recieves the message as if it were recieving it real-time.
+
+Another implementation would be to emulate a shared virtual hard drive (a third drive) with locks preventing OS$_2$ from writing the same file OS$_1$ is writing and vice-versa.
+
+\end{document}
