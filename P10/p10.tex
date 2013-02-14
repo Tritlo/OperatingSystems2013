@@ -1,18 +1,43 @@
-\documentclass[a4]{article}
+    \documentclass[a4]{article}
 
-\input{/home/tritlo/Dropbox/Latex/header.tex}
-
-
-\title{Operating Systems\\
-Project 10}
-\author{
-    Haukur Óskar Þorgeirsson\\
-    hth152@hi.is \and
-    Matthías Páll Gissurarson\\
-    mpg3@hi.is
-}
-\begin{document}
-\maketitle
+    \input{/home/tritlo/Dropbox/Latex/header.tex}
 
 
-\end{document}
+    \title{Operating Systems\\
+    Project 10}
+    \author{
+        Haukur Óskar Þorgeirsson\\
+        hth152@hi.is \and
+        Matthías Páll Gissurarson\\
+        mpg3@hi.is
+    }
+    \nonums
+    \begin{document}
+    \maketitle
+
+    \section{Solution}
+    Let $T$ be the time, $R$ be the Running Process, $rq$ be the ready queue and $wq$
+    the waiting queue. We get the following procession of changes
+    $$
+    \begin{array}{l | l | l | l| l}
+      \text{Time} & R & wq & rq & \text{Comment} \\
+      \hline
+      0  &  P_1 &         &         & \text{ $P_1$ arrives and starts.}\\
+      1  &      & P_1     &         &\text{ $P_1$ does I/O and goes into wq. }\\
+      2  &  P_2 & P_1     &         & \text{ $P_2$ arrives and starts, as no proc.\ was running.}\\
+
+      3  &  P_2 &         & P_1     &\text{ $P_1$ finishes I/O an goes into rq.}\\
+      4  &  P_2 &         & P_1 P_3 &\text{ $P_3$ arrives and goes into rq. }\\ 
+      6  &  P_1 &         & P_3 P_2 & \text{ Quanta of $P_2$ runs out}\\
+         &      &         &         &\text{ and $P_2$ goes into ready queue. $P_1$ starts again.}\\
+
+      8  &  P_3 & P_1     & P_2     & \text{ $P_1$ does I/O and goes into wq. $P_3$ starts.}\\
+      9  &  P_2 & P_1 P_3 &         & \text{ $P_3$ does I/O and goes into wq. $P_2$ starts.}\\
+      10 &      & P_1 P_3 &         & \text{ $P_2$ terminates, but all procs.\ are blocked.}\\
+      12 &  P_1 & P_3     &         & \text{ $P_1$ finishes I/O and starts.}\\
+      13 &  P_1 &         & P_3     & \text{ $P_3$ finishes I/O and goes into rq.}\\
+      16 &  P_3 &         & P_1     & \text{ Quanta of $P_1$ runs out, $P_3$ starts.} \\
+      18 &  P_1 &         &         & \text{ $P_3$ terminates and $P_1$ starts.}\\
+      19 &      &         &         & \text{ $P_1$ terminates.}
+    \end{array}
+    $$\end{document}
