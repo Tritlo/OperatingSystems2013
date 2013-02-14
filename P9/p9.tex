@@ -2,7 +2,6 @@
 
 \input{/home/tritlo/Dropbox/Latex/header.tex}
 
-
 \title{Operating Systems\\
 Project 9}
 \author{
@@ -11,16 +10,85 @@ Project 9}
     Matthías Páll Gissurarson\\
     mpg3@hi.is
 }
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{fancyvrb}
 \begin{document}
+\pagestyle{empty} % don't need to display page numbers, right?
+
 \maketitle
 
 \begin{enumerate}
-\item \begin{anum}
-  \item FCFS:
-  \item SJF:
-  \item SRTF:
-  \item RR:
-  \item RR$_{prio}$:
+\item Residence time is $r_i = f_i - a_i$, where $a_i$ is arrival time
+  and $f_i$ is finish time of the process, waiting time is $w_i = r_i
+  - d_i$, where $d_i$ is the service time. We note that $\widetilde{W}
+  = \1{n} \cdot \sum_{i=1}^n w_i = \widetilde{R} - \1{n} \cdot
+  \sum_{i=1}^n d_i$, where $\widetilde{R} = \1{n} \sum_{i=1}^n r_i$,
+  and $$\1{n} \cdot \sum_{i=1}^n d_i = \1{5}( 4 + 10 + 8 + 5 + 4) =
+  6.2,$$ and $$\widetilde{R} = \1{n} \sum_{i=1}^n f_i - a_i = \1{n}
+  \sum_{i=1}^n f_i - \1{n} \sum_{i=1}^n a_i = \1{n} \sum_{i=1}^n f_i -
+  7.4$$
+  \begin{anum}
+  \item FCFS:\\
+\begin{verbatim}
+      P1           P2                P3           P4       P5
+  +-------+-------------------+---------------+---------+-------+
+  |   4   |        10         |       8       |    5    |   4   |
+  +---+-+-+-------------------+-------+-------+---------+-------+
+  |   | |                     |       |
+  P1  P2P3     	       	      P4      P5
+  0   2	3      	       	      14      18
+\end{verbatim}
+    Order would be $P_1, P_2, P_3, P_4, P_5$, Average residence time
+    is $19.6 - 7.4 = 12.2$ and Average
+    waiting time is $12.2 - 6.2 = 6$
+  \item SJF:\\
+\begin{verbatim}
+      P1            P3                P2          P5       P4  
+  +-------+---------------+-------------------+-------+---------+
+  |   4   |         8     |           10      |    4  |     5   |
+  +---+-+-+---------------+---+-------+-------+-------+---------+
+  |   | |                     |       |
+  P1  P2P3     	       	      P4      P5
+  0   2	3      	       	      14      18
+\end{verbatim}
+    Order would be $P_1, P_3, P_2, P_5, P_4$, Average residence time
+    is $19 - 7.4 = 11.6$ and Average waiting time is $5.4$.
+  \item SRTF:\\
+\begin{verbatim}
+      P1           P3      P2      P4      P5         P2    
+  +-------+---------------+---+---------+-------+---------------+
+  |   4   |         8     | 2 |    4    |   4   |      8        |
+  +---+-+-+---------------+---+-------+-+-------+---------------+
+  |   | |                     |       |
+  P1  P2P3     	       	      P4      P5
+  0   2	3      	       	      14      18
+\end{verbatim}
+    Order would be $P_1,P_4, P_2, P_5, P_4, P_2$, Avg. residence time
+    is $17.8 - 7.4 = 10.4$ and Avg. waiting time is $10.4 - 6.2 = 4.2$.
+  \item RR:\\
+\begin{verbatim}
+      P1      P2      P3      P2      P3      P4    P2    P5   P4 
+  +-------+-------+-------+-------+-------+-------+---+-------+-+
+  |   4   |   4   |   4   |   4   |   4   |   4   | 2 |   4   |1|
+  +---+-+-+-------+-------+---+---+---+---+-------+---+-------+-+
+  |   | |                     |       |
+  P1  P2P3     	       	      P4      P5
+  0   2	3      	       	      14      18
+\end{verbatim}
+    Order would be $P_1, P_2, P_3, P_2, P_3, P_4, P_2, P_5, P_4$,
+    Avg. residence time is $22.2 - 7.4 = 14.8$ and Avg. waiting time is $14.8 - 6.2 = 8.6$.
+  \item RR$_{prio}$:\\
+\begin{verbatim}
+      P1      P3      P3      P2      P4      P5   P4   P2    P2 
+  +-------+-------+-------+-------+-------+-------+-+-------+---+
+  |   4   |   4   |   4   |   4   |   4   |   4   |1|   4   | 2 |
+  +---+-+-+-------+-------+---+---+---+---+-------+-+-------+---+
+  |   | |                     |       |
+  P1  P2P3     	       	      P4      P5
+  0   2	3      	       	      14      18
+\end{verbatim}
+    Order would be $P_1, P_3, P_3, P_2, P_4, P_5, P_4, P_2, P_2$,
+    Avg. residence time is $19.2 - 7.4 = 11.8$ and Avg. waiting time is $11.8 - 6.2 = 5.6$.
   \end{anum}
 
 \item As processes are created by running processes, and there is only
