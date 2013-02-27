@@ -1,0 +1,52 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc} 
+\usepackage[icelandic]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin=3cm]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\input{kvmacros}
+
+\newcommand{\Nz}{\mathbb{N}_0}
+\newcommand{\ilc}{\lstinline}
+\newcommand{\fig}[3]{\begin{figure}[h!]
+\centering
+\includegraphics#1{#2}
+\caption{#3}
+\end{figure}}
+
+\begin{document}
+
+\title{Operating systems\\Project 13}
+\author{
+    Haukur Óskar Þorgeirsson\\
+    hth152@hi.is \and
+    Matthías Páll Gissurarson\\
+    mpg3@hi.is}
+\maketitle
+
+\section{Swimming relay}
+
+The suggested solution will not always achieve the intended synchronization because the following might happen if the scheduler behaves is a certain way:\\
+
+\begin{tabular}{|ll|}
+\hline
+Initialization:&semaphore sem = sem.init(0);\\
+\hline
+Third swimmer:&sem.wait(); //to waiting queue\\ \hline
+Second swimmer:&sem.wait(); //to waiting queue, behind the third swimmer\\ \hline
+First swimmer:&swim();\\
+&sem.signal(); //Swimmer three to ready queue\\ \hline
+Third swimmer:&swim() //Third swimmer swims before the second swimmer\\ \hline
+\end{tabular}\\
+
+So if the scheduler gives the third swimmer precedence over the second swimmer (after all, the third swimmer takes less time as it doesn't have to signal), then the third swimmer will swim before the second one.
+
+
+
+\end{document}
