@@ -1,0 +1,48 @@
+\documentclass[a4]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{a4,graphics,amsmath,amsfonts,amsbsy,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{comment}
+\usepackage{accents}
+
+\setlength{\parskip}{8pt plus 1pt minus 1pt}
+%Verdur ad vera her, sumir pakkar dependa a thetta.
+\usepackage[icelandic]{babel}
+
+\title{Operating Systems\\
+Project 14}
+\author{
+    Haukur Óskar Þorgeirsson\\
+    hth152@hi.is \and
+    Matthías Páll Gissurarson\\
+    mpg3@hi.is
+}
+\begin{document}
+\maketitle
+
+
+\begin{enumerate}
+\item Following is the modified code.  \lstinputlisting[title =
+  \lstname, frame = single, language=Java, breaklines=true,
+  numbers=left]{RaceThreadsSemaphore.java}
+\item See code in 1.
+\item The following was the sequence of execution. As we can see,
+  there is some interleaving.
+\begin{verbatim}
+0000000000000000000000000000000000000000000000000000000
+1111111111111111111111111111111111111111111111111111111
+1111111111110000000000000000000000000000000000000000000
+00111111111111111111111111111111111
+\end{verbatim}
+\item As can be seen from the comment in 1, initiating the semaphore
+  with 2 instead of 1 would allow 2 threads to run at once, however,
+  this would break the program and not give us the correct result. To
+  fix that however, one could implement some Mutex for access to the
+  variable, but then we'd have effectively one thread at a time.
+\end{enumerate}
+\end{document}
