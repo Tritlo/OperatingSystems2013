@@ -13,8 +13,8 @@ def Shower():
         ShowerFree.wait()
         Shower1Free = True
         ShowerFree.signal()
-        Showers.signal()
     else:
-        takeShower(2)
         ShowerFree.signal()
-        Showers.signal()
+        takeShower(2)
+
+    Showers.signal()
