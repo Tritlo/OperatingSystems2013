@@ -16,4 +16,5 @@ def Shower():
         Showers.signal()
     else:
         takeShower(2)
+        ShowerFree.signal()
         Showers.signal()
