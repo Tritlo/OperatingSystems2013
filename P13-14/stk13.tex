@@ -78,7 +78,9 @@ Any given swimmer:  &enter.wait();\\
                     &\quad shwr1free := false;  \\
                     &\quad shwr1chck.signal();\\
                     &\quad shwr1.takeshower();\\
-                    &\quad shwr1free := true;\}\\
+                    &\quad shwr1chck.wait();\\
+                    &\quad shwr1free := true;\\
+                    &\quad shwr1chck.signal();\}\\
                     &else\{ {\color{blue} //Someone is in shwr1, but at most 2 in shower room,}\\
                     &\quad shwr1chck.signal(); {\color{blue} //so shwr2 is not occupied.}\\
                     &\quad shwr2.takeshower();\} {\color{blue} //Even if the other one finishes (scheduler) and lets}\\
