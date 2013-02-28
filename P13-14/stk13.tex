@@ -61,10 +61,10 @@ Second swimmer: &sem1.wait();\\
 Third swimmer:  &sem2.wait();\\
                 &wait();\\ \hline
 \end{tabular}
-
+\newpage
 \section{Swimmer showers}
 
-Here is a solution to the problem:
+Here is a solution to the problem:\\
 
 \begin{tabular}{|ll|}\hline
 Initialization:     &semaphore enter:=enter.init(2);\\
@@ -79,10 +79,12 @@ Any given swimmer:  &enter.wait();\\
                     &\quad shwr1chck.signal();\\
                     &\quad shwr1.takeshower();\\
                     &\quad shwr1free := true;\}\\
-                    &else\{ {\color{blue} //Someone in shwr1, but at most 2 in shower room,}\\
+                    &else\{ {\color{blue} //Someone is in shwr1, but at most 2 in shower room,}\\
                     &\quad shwr1chck.signal(); {\color{blue} //so shwr2 is not occupied.}\\
-                    &\quad shwr2.takeshower();\} {\color{blue} //Even if the other one finishes and lets}\\
+                    &\quad shwr2.takeshower();\} {\color{blue} //Even if the other one finishes (scheduler) and lets}\\
                     &enter.signal(); {\color{blue} //someone else in, the new one will take shwr1}\\ \hline
 \end{tabular}
+
+
 
 \end{document}
