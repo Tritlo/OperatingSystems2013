@@ -9,6 +9,7 @@
 \usepackage[margin=3cm]{geometry}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{xcolor}
 %\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
 \input{kvmacros}
 
@@ -47,6 +48,41 @@ Third swimmer:&swim() //Third swimmer swims before the second swimmer\\ \hline
 
 So if the scheduler gives the third swimmer precedence over the second swimmer (after all, the third swimmer takes less time as it doesn't have to signal), then the third swimmer will swim before the second one.
 
+The only way to be sure to remedy this is by having two semaphores, so like this:\\
 
+\begin{tabular}{|ll|} \hline
+Initialization:	&semaphore sem1:=sem1.init(0);\\
+                &semaphore sem2:=sem2.init(0);\\ \hline
+First swimmer:  &swim();\\
+                &sem1.signal();\\ \hline
+Second swimmer: &sem1.wait();\\
+                &swim();\\
+                &sem2.signal();\\ \hline
+Third swimmer:  &sem2.wait();\\
+                &wait();\\ \hline
+\end{tabular}
+
+\section{Swimmer showers}
+
+Here is a solution to the problem:
+
+\begin{tabular}{|ll|}\hline
+Initialization:     &semaphore enter:=enter.init(2);\\
+                    &semaphore shwr1chck:=shwr1.init(1);\\
+                    &boolean shwr1free := true;\\
+                    &shower shwr1 := new shower();\\
+                    &shower shwr2 := new shower();\\ \hline
+Any given swimmer:  &enter.wait();\\
+                    &shwr1chck.wait();\\
+                    &if(shwr1free)\{\\
+                    &\quad shwr1free := false;  \\
+                    &\quad shwr1chck.signal();\\
+                    &\quad shwr1.takeshower();\\
+                    &\quad shwr1free := true;\}\\
+                    &else\{ {\color{blue} //Someone in shwr1, but at most 2 in shower room,}\\
+                    &\quad shwr1chck.signal(); {\color{blue} //so shwr2 is not occupied.}\\
+                    &\quad shwr2.takeshower();\} {\color{blue} //Even if the other one finishes and lets}\\
+                    &enter.signal(); {\color{blue} //someone else in, the new one will take shwr1}\\ \hline
+\end{tabular}
 
 \end{document}
