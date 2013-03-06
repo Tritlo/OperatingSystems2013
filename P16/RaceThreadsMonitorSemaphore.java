@@ -15,7 +15,7 @@ public class RaceThreadsMonitorSemaphore
 		{
 			for(int i = 0; i < COUNT_MAX; i++)
 			{
-			    sem.MSwait(1);
+			    sem.MSwait(1);//Protect the variable
 			    //System.out.print(this.getName());
 			    //System.out.flush();
 			    in++;
