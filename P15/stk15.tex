@@ -1,0 +1,31 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc} 
+\usepackage[icelandic]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin=3cm]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\input{kvmacros}
+
+\newcommand{\Nz}{\mathbb{N}_0}
+\newcommand{\ilc}{\lstinline}
+\newcommand{\fig}[3]{\begin{figure}[h!]
+\centering
+\includegraphics#1{#2}
+\caption{#3}
+\end{figure}}
+
+\begin{document}
+
+\title{Operating Systems\\Project 15}
+\author{Haukur Óskar Þorgeirsson\\hth152@hi.is \and Matthías Páll Gissurarson\\mpg3@hi.is}
+\maketitle
+
+\lstinputlisting{Bakers.txt}
+
+\end{document}
