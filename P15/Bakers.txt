@@ -3,7 +3,8 @@ initialize()
 	semaphore pc := pc.init(0) //plain bolla and cream
 	semaphore chc := chc.init(0) //chocolate and cream
 	semaphore pch := pch.init(0) //plain bolla and chocolate
-	semaphore mast := mast.init(0)
+	semaphore mast := mast.init(0) //semaphore for the master baker while
+	                               //offering ingredients
 	
 	parallel
 	{
@@ -16,15 +17,16 @@ Thread master_baker()
 {
 	while(true)
 	{
-		ingredients := rand_ingredients();
-		offer_ingredients(ingredients);
+		ingredients := rand_ingredients(); //get two random ingredients
+		offer_ingredients(ingredients); //put them on the table
 		switch(ingredients)
 		{
 			case (plain_bolla,chocolate): pch.signal(); break;
 			case (plain_bolla,cream): pc.signal(); break;
 			case (chocolate,cream): chc.signal(); break;
-		}
-		mast.wait();
+		} //signal the correct assistant
+		mast.wait(); //wait until the assistant takes
+		             //the ingredients off the table
 	}
 }
 
@@ -32,9 +34,9 @@ Thread assist_baker(ingredient ingr, semaphore ingrs)
 {
 	while(true)
 	{
-		ingrs.wait();
+		ingrs.wait(); //wait until the correct ingredients are on the table
 		ingreds:=fetch_ingredients();
-		mast.signal();
+		mast.signal(); //Tell the master he can now offer more ingredients
 		assemble_bolla(ingr,ingreds);
 	}
 }
