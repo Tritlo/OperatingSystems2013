@@ -1,0 +1,40 @@
+initialize()
+{
+	semaphore pc := pc.init(0) //plain bolla and cream
+	semaphore chc := chc.init(0) //chocolate and cream
+	semaphore pch := pch.init(0) //plain bolla and chocolate
+	semaphore mast := mast.init(0)
+	
+	parallel
+	{
+		master_baker(); assist_baker(plain_bolla, chc);
+		assist_baker(cream,pch); assist_baker(chocolate,pc);
+	}
+}
+
+Thread master_baker()
+{
+	while(true)
+	{
+		ingredients := rand_ingredients();
+		offer_ingredients(ingredients);
+		switch(ingredients)
+		{
+			case (plain_bolla,chocolate): pch.signal(); break;
+			case (plain_bolla,cream): pc.signal(); break;
+			case (chocolate,cream): chc.signal(); break;
+		}
+		mast.wait();
+	}
+}
+
+Thread assist_baker(ingredient ingr, semaphore ingrs)
+{
+	while(true)
+	{
+		ingrs.wait();
+		ingreds:=fetch_ingredients();
+		mast.signal();
+		assemble_bolla(ingr,ingreds);
+	}
+}
