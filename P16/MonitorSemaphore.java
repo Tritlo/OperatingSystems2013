@@ -1,7 +1,6 @@
 public class MonitorSemaphore
 {
   private int Licenses = 0; //Stores the amount of licenses currently available, >= 0
-  private int TotalLicenses = 0;
   
   //Use: sem = new MonitorSemaphore(L)
   //Pre: L >= 0;
@@ -17,7 +16,6 @@ public class MonitorSemaphore
   public synchronized void MSinit(int Licenses)
   {
     this.Licenses = Licenses;
-    this.TotalLicenses = Licenses;
   }
 
   //Use: sem.MSsignal(L)
