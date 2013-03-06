@@ -25,10 +25,6 @@ public class MonitorSemaphore
   //Post: sem has freed L licenses
   public synchronized void MSsignal(int toFree)
   {
-    if (this.Licenses + toFree > this.TotalLicenses)
-      {
-	throw new IllegalArgumentException();
-      }
     this.Licenses += toFree;
     notifyAll();
   }
