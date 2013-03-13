@@ -1,0 +1,48 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc} 
+\usepackage[icelandic]{babel} 
+\usepackage[utf8]{inputenc} 
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[margin=3cm]{geometry}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[section]{placeins}
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\input{kvmacros}
+
+\newcommand{\Nz}{\mathbb{N}_0}
+\newcommand{\ilc}{\lstinline}
+\newcommand{\fig}[3]{\begin{figure}[h!]
+\centering
+\includegraphics#1{#2}
+\caption{#3}
+\end{figure}}
+
+\begin{document}
+
+\title{Operating Systems\\Project 18}
+\author{Haukur Óskar Þorgeirsson\\hth152@hi.is \and Matthías Páll Gissurarson\\mpg3@hi.is}
+\maketitle
+
+\section{}
+
+\fig{[height=6cm]}{base.png}{At the beginning}
+
+\fig{[height=6cm]}{step1.png}{P$_1$ requests R$_1$}
+
+\fig{[height=7cm]}{step2.png}{P$_1$ is assigned R$_1$ and requests R$_2$}
+
+\fig{[height=7cm]}{step3.png}{P$_1$ is assigned an instance of R$_2$ and P$_2$ requests R$_3$}
+
+\fig{[height=7cm]}{step4.png}{P$_2$ is assigned R$_3$ and requests R$_1$}
+
+\fig{[height=7cm]}{step5.png}{P$_2$ is not assigned R$_1$ as P$_1$ has it. P$_1$ requests R$_3$ but will not get it because P$_2$ has it. Neither process can continue as they are both waiting for a resource the other one has but will not release until it has finished. We can also see the cycle clearly, it is a deadlock.}
+
+\section{}
+
+
+
+\end{document}
