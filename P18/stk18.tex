@@ -20,6 +20,8 @@
 \includegraphics#1{#2}
 \caption{#3}
 \end{figure}}
+\newcommand{\bbm}{\begin{bmatrix}}
+\newcommand{\ebm}{\end{bmatrix}}
 
 \begin{document}
 
@@ -43,6 +45,31 @@
 
 \section{}
 
+At the beginning, the state is such:
+
+\[
+N=M-C=\bbm 1&1&1\\1&1&1 \ebm - \bbm 0&0&0\\0&0&0 \ebm
+\]
+
+($C$ is all zeroes as this is the initial state and no resources have been requested or allocated. $M$ describes how each process needs one of each resource.)
+
+\[
+A=\bbm 1&2&1 \ebm
+\]
+
+Now, \\
+
+$\bbm 1&1&1 \ebm \le \bbm 1&2&1 \ebm$ (pointwise, the former being the first row of $M$)
+
+So we mark P$_1$ and $A:=A+\bbm 0&0&0 \ebm$ (The latter being the first row of $C$). Also,\\
+
+$\bbm 1&1&1 \ebm \le \bbm 1&2&1 \ebm$ (pointwise, the former being the second row of $M$)
+
+So we mark P$_2$ and $A:=A+\bbm 0&0&0 \ebm$ (The latter being the second row of $C$).\\
+
+Both processes have been marked, so this is a safe state. an example og a schedule that would be without deadlocks is:\\
+
+P$_1$: R$_1$; P$_1$: R$_2$; P$_1$: R$_3$; P$_2$: R$_3$; P$_2$: R$_1$; P$_2$: R$_2$.
 
 
 \end{document}
