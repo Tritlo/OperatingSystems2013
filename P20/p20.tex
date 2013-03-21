@@ -1,14 +1,15 @@
 \documentclass[a4]{article}  
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{a4,graphics,amsmath,amsfonts,amsbsy,amssymb,amsthm}
+\usepackage{graphics,amsmath,amsfonts,amsbsy,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{listings}
 \usepackage{enumerate}
 \usepackage{comment}
-\usepackage{accents}
+\usepackage[margin=1in]{geometry}
+\usepackage{nicefrac}
 
 \setlength{\parskip}{8pt plus 1pt minus 1pt}
 %Verdur ad vera her, sumir pakkar dependa a thetta.
@@ -26,7 +27,17 @@ Project 20}
 \maketitle
 
 \begin{enumerate}
-\item We have a 16 bit databus, which means that we can transfer/read 2 bytes per access. We need to access 512 KB of memory, so that means 256K accesses. We do 10 K accesses per second, so this evens out to 2.56 seconds.
+
+\item With a 16 bit databus we can read 2 bytes per access, and with $5 \times 2^{20}$ accesses per second, that's $10*2^{20}$ B/s read.Now, we need to read $2^{19}$ B, so it will take $\dfrac{2^{19} B}{10*2^{20} \nicefrac{B}{s}} = \frac{1}{20} s = 0.05 s$
+
+\item With 24 bits of address space, it fits $2^{24}$ adresses and each page is 4 KB = $2^{12}$ B, so the logical memory is split into $\frac{2^{24}}{2^{12}}=2^{12}=4096$ pages. The physical memory is 512 KB = $2^{19}$ B, and each page/frame is $2^{12}$ B, so it is split into $\frac{2^{19}}{2^{12}}=2^{7}=128$ frames.
+
+\item Since the number of frames is $2^{7}$, the length of the frame number is 7 bits, so with just that and a valid bit, we have 8 bits or one byte. The number of entries is the same as the number of logical pages, $2^{12}$, so a single-level page table would take $2^{12} \times 1$ B = 4 KiB (Kilo-binary Bytes, $2^{10}$). Obviously, this would occupy exactly 1 page/frame.
+
+\item This would not be possible unless you loaded the page table back into memory as soon as you need to access something in memory, unless the CPU could connect straight to the disk (which has some stipulations). So I would say storing the page table on disk is infeasible at best.
+
+\item Reading 512 KB of physical memory takes 0.05 seconds. It takes 20 ms to load a page and there are 128 pages in 512 KB (as calculated before), thus loading the pages into memory would take a total of 128*20 ms = 2560 ms = 2,56 s. Thus reading 512 KB of virtual memory would take 0.05 + 2.56 = 2.61 seconds.
+
 \end{enumerate}
 
 \end{document}
